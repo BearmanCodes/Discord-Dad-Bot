@@ -67,7 +67,7 @@ client.on('message', message => {
         if (message.content.startsWith("dad_deal_with")){
             let memberName = message.mentions.members.first().user.username;
 
-            message.channel.send(memberName + " if you don't stop bullying my chilid i will do this to you", { files: ["./image.png"] });
+            message.channel.send(memberName + " if you don't stop bullying my child i will do this to you", { files: ["./image.png"] });
         }
     }
 })
