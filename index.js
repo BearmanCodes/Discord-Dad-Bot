@@ -17,7 +17,7 @@ client.on('message', message => {
             message.reply("Hi," + restMessage + ". I'm Dad!");
         }
 
-        if (message.content.startsWith(`${prefix}joke`)){
+        if (message.content.startsWith("dad_joke")){
             var jokes = 
             [
                 "No i did not get a haricut. I got them all cut.",
@@ -62,6 +62,12 @@ client.on('message', message => {
             ];
             var joke = jokes[(Math.floor(Math.random() * jokes.length))];
             message.channel.send(joke);
+        }
+
+        if (message.content.startsWith("dad_deal_with")){
+            let memberName = message.mentions.members.first().user.username;
+
+            message.channel.send(memberName + " if you don't stop bullying my chilid i will do this to you", { files: ["./image.png"] });
         }
     }
 })
