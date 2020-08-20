@@ -4,8 +4,6 @@ const client = new Discord.Client();
 
 client.once('ready', () => {
     console.log('Hi ready, im dad');
-    var defaultAvatar = "https://cdn.discordapp.com/avatars/745652852017463361/8c398ab2d5378ae082fdb69256c855db.webp";
-    client.user.setAvatar (defaultAvatar);
 })
 
 client.on('message', message => {
@@ -76,12 +74,6 @@ client.on('message', message => {
                 var joke = jokes[(Math.floor(Math.random() * jokes.length))];
                 message.channel.send(joke);
             }
-    
-            /*if (message.content.startsWith(`${prefix}embarrass`)){
-                var defaultAvatar = "https://cdn.discordapp.com/avatars/745652852017463361/8c398ab2d5378ae082fdb69256c855db.webp";
-                client.user.setAvatar (message.member.user.avatarURL());
-                setTimeout(function() {client.user.setUsername (message.member.user.username);}, 5000);
-            }*/
         }
         }
 })
