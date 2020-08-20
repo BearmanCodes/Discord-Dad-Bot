@@ -3,12 +3,14 @@ const { prefix, token, guildId } = require('./config.json');
 const client = new Discord.Client();
 
 client.once('ready', () => {
-    console.log('Hi ready, im dad!');
+    console.log('Hi ready, im dad');
+    var defaultAvatar = "https://cdn.discordapp.com/avatars/745652852017463361/8c398ab2d5378ae082fdb69256c855db.webp";
+    client.user.setAvatar (defaultAvatar);
 })
 
 client.on('message', message => {
     const guild = client.guilds.cache.get(guildId);
-    const isDadBot = message.member.roles.cache.some(role => role.name === 'BOT');
+    const isDadBot = message.member.roles.cache.some(role => role.name === 'DAD');
     
     if (message.member.hasPermission(['SEND_MESSAGES']))
     {
@@ -75,11 +77,11 @@ client.on('message', message => {
                 message.channel.send(joke);
             }
     
-            if (message.content.startsWith("dad_deal_with")){
-                let memberName = message.mentions.members.first().user.username;
-    
-                message.channel.send(memberName + " if you don't stop bullying my child i will do this to you", { files: ["./image.png"] });
-            }
+            /*if (message.content.startsWith(`${prefix}embarrass`)){
+                var defaultAvatar = "https://cdn.discordapp.com/avatars/745652852017463361/8c398ab2d5378ae082fdb69256c855db.webp";
+                client.user.setAvatar (message.member.user.avatarURL());
+                setTimeout(function() {client.user.setUsername (message.member.user.username);}, 5000);
+            }*/
         }
         }
 })
