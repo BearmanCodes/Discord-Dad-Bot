@@ -1,18 +1,18 @@
 const Discord = require('discord.js');
 const { prefix, token, guildId } = require('./config.json');
 const client = new Discord.Client();
+const guild = client.guilds.cache.get(guildId);
 
 client.once('ready', () => {
     console.log('Hi ready, im dad');
 })
 
 client.on('message', message => {
-    const guild = client.guilds.cache.get(guildId);
-    const isDadBot = message.member.roles.cache.some(role => role.name === 'DAD');
+    const Bot = message.member.roles.cache.some(role => role.name === 'ADMIN');
     
     if (message.member.hasPermission(['SEND_MESSAGES']))
     {
-        if (isDadBot == false)
+        if (Bot == false)
         {
             if (message.content.startsWith("im") || message.content.startsWith("Im")){
                 var restMessage = message.content.toLowerCase().replace("im", "");
@@ -74,9 +74,47 @@ client.on('message', message => {
                 var joke = jokes[(Math.floor(Math.random() * jokes.length))];
                 message.channel.send(joke);
             }
+
+            if (message.content.startsWith(`${prefix}embarrass`)){
+                var messages_can_send = 
+                [
+                    "Hey " + message.member.user.username + ", remember when you drank straight from a cow to get milk?",
+
+                    "Hey " + message.member.user.username + ", remember when we got you that Anime Body Pillow for christmas?",
+
+                    "Hey " + message.member.user.username + ", did you remember to take your daily pepto bismol for your stomach issues?",
+
+                    "Hey " + message.member.user.username + ", remember when you tried to tame that horse and got your front teeth knocked out?",
+
+                    "Hey " + message.member.user.username + ", remember your appointment with the Proctologist is it 7:00.",
+
+                    "Hey " + message.member.user.username + ", remember when you took a bath in a public pool?",
+
+                    "Hey " + message.member.user.username + ", how many times do i got to tell you to stop licking chairs?",
+
+                    "Hey " + message.member.user.username + ", remember when you got those beans stuck in your butt?",
+
+                    "Hey " + message.member.user.username + ", you've got to stop eating the candles!",
+
+                    "Hey " + message.member.user.username + ", you've got to stop drinking the toilet water!",
+
+                    "Hey " + message.member.user.username + ", how is that Anime blanket we got you?",
+
+                    "Hey " + message.member.user.username + ", remember you got to take a bath to get those beans off of you.",
+
+                    "Hey " + message.member.user.username + ", how many times do i got to tell you to not take a bath in the public well!",
+
+                    "Hey " + message.member.user.username + ", did you remember to unclog the toliet that you took a crap in?",
+                ];
+
+                var message = messages_can_send[Math.floor(Math.random() * messages_can_send.length)]
+                console.log(message);
+            }
+
         }
-        }
+    }
 })
+
 
 client.login(token);
 
