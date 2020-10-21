@@ -1,19 +1,19 @@
 const Discord = require('discord.js');
-const { prefix, token, guildId } = require('./config.json');
+const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
-const guild = client.guilds.cache.get(guildId);
 
 client.once('ready', () => {
     console.log('Hi ready, im dad');
 })
 
 client.on('message', message => {
-    const Bot = message.member.roles.cache.some(role => role.name === 'ADMIN');
+    const Bot = message.member.user.bot == true;
     
     if (message.member.hasPermission(['SEND_MESSAGES']))
     {
         if (Bot == false)
         {
+
             if (message.content.startsWith("im") || message.content.startsWith("Im")){
                 var restMessage = message.content.toLowerCase().replace("im", "");
                 message.reply("Hi," + restMessage + ". I'm Dad!");
@@ -76,45 +76,102 @@ client.on('message', message => {
             }
 
             if (message.content.startsWith(`${prefix}embarrass`)){
+                const member = message.mentions.members.first();
+
+                if (member == null)
+                {
+                    message.reply("Child please specify a person.");
+                    return;
+                }
+                
+                const memberName = member.user.username;
+
                 var messages_can_send = 
                 [
-                    "Hey " + message.member.user.username + ", remember when you drank straight from a cow to get milk?",
+                    "Hey " + memberName + ", remember when you drank straight from a cow to get milk?",
 
-                    "Hey " + message.member.user.username + ", remember when we got you that Anime Body Pillow for christmas?",
+                    "Hey " + memberName + ", remember when we got you that Anime Body Pillow for christmas?",
 
-                    "Hey " + message.member.user.username + ", did you remember to take your daily pepto bismol for your stomach issues?",
+                    "Hey " + memberName + ", did you remember to take your daily pepto bismol for your stomach issues?",
 
-                    "Hey " + message.member.user.username + ", remember when you tried to tame that horse and got your front teeth knocked out?",
+                    "Hey " + memberName + ", remember when you tried to tame that horse and got your front teeth knocked out?",
 
-                    "Hey " + message.member.user.username + ", remember your appointment with the Proctologist is it 7:00.",
+                    "Hey " + memberName + ", remember your appointment with the Proctologist is it 7:00.",
 
-                    "Hey " + message.member.user.username + ", remember when you took a bath in a public pool?",
+                    "Hey " + memberName + ", remember when you took a bath in a public pool?",
 
-                    "Hey " + message.member.user.username + ", how many times do i got to tell you to stop licking chairs?",
+                    "Hey " + memberName + ", how many times do i got to tell you to stop licking chairs?",
 
-                    "Hey " + message.member.user.username + ", remember when you got those beans stuck in your butt?",
+                    "Hey " + memberName + ", remember when you got those beans stuck in your butt?",
 
-                    "Hey " + message.member.user.username + ", you've got to stop eating the candles!",
+                    "Hey " + memberName + ", you've got to stop eating the candles!",
 
-                    "Hey " + message.member.user.username + ", you've got to stop drinking the toilet water!",
+                    "Hey " + memberName + ", you've got to stop drinking the toilet water!",
 
-                    "Hey " + message.member.user.username + ", how is that Anime blanket we got you?",
+                    "Hey " + memberName + ", how is that Anime blanket we got you?",
 
-                    "Hey " + message.member.user.username + ", remember you got to take a bath to get those beans off of you.",
+                    "Hey " + memberName + ", remember you got to take a bath to get those beans off of you.",
 
-                    "Hey " + message.member.user.username + ", how many times do i got to tell you to not take a bath in the public well!",
+                    "Hey " + memberName + ", how many times do i got to tell you to not take a bath in the public well!",
 
-                    "Hey " + message.member.user.username + ", did you remember to unclog the toliet that you took a crap in?",
+                    "Hey " + memberName + ", did you remember to unclog the toliet that you took a crap in?",
                 ];
 
-                var message = messages_can_send[Math.floor(Math.random() * messages_can_send.length)]
-                console.log(message);
+                var messageThing = messages_can_send[Math.floor(Math.random() * messages_can_send.length)];
+                message.channel.send(messageThing);
+            }
+            if (message.member.hasPermission(['MANAGE_ROLES']))
+            {
+                if (message.content.startsWith("^add")){
+                    let member = message.mentions.members.first();
+                    if (member == null)
+                    {
+                        message.reply("Please specify a member.");
+                        return;
+                    }
+                    const guild = member.guild;
+                    var withoutPerson = message.content.replace("<@!" + member.user.id + ">", '');
+                    var roleName = withoutPerson.substring(6);
+                    if (roleName == null)
+                    {
+                        message.reply("Please specify a role.");
+                        return;
+                    }
+                    const role = guild.roles.cache.find(role => role.name === roleName);
+                    if (role == null)
+                    {
+                        message.reply("This role does not exist (Check Capitilzation and Spelling)");
+                        return;
+                    }
+                    const hasRole = member.roles.cache.some(roleagain => roleagain.name == role.name);
+                    console.log(hasRole);
+                    if (hasRole == false)
+                    {
+                        member.roles.add(role);
+                        message.reply("Successfully added role to member!");
+                    }else
+                    {
+                        message.reply("This member already has this role.");
+                        return;
+                    }
+                }
+            }else
+            {
+                if (message.content.startsWith("^add")){
+                    message.reply("You aint cool enough for that");
+                    return;
+                }
             }
 
         }
     }
 })
 
+client.on('guildMemberAdd', member =>{
+    const guild = member.guild;
+    /*change later*/ const defaultRole = guild.roles.cache.find(role => role.name === "PERSON");
+    member.roles.add(defaultRole);
+})
 
 client.login(token);
 
