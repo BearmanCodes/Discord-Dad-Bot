@@ -96,7 +96,7 @@ client.on('message', message => {
 
                     "Hey " + memberName + ", remember when you tried to tame that horse and got your front teeth knocked out?",
 
-                    "Hey " + memberName + ", remember your appointment with the Proctologist is it 7:00.",
+                    "Hey " + memberName + ", remember your appointment with the Proctologist is at 7:00.",
 
                     "Hey " + memberName + ", remember when you took a bath in a public pool?",
 
