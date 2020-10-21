@@ -140,11 +140,11 @@ client.on('message', message => {
                     const role = guild.roles.cache.find(role => role.name === roleName);
                     if (role == null)
                     {
-                        message.reply("This role does not exist (Check Capitilzation and Spelling)");
+                        message.reply("This role does not exist (Check Capitalization and Spelling)");
                         return;
                     }
                     const hasRole = member.roles.cache.some(roleagain => roleagain.name == role.name);
-                    console.log(hasRole);
+                    //console.log(hasRole);
                     if (hasRole == false)
                     {
                         member.roles.add(role);
@@ -155,10 +155,45 @@ client.on('message', message => {
                         return;
                     }
                 }
+                
+
+                if (message.content.startsWith("^remove")){
+                    let member = message.mentions.members.first();
+                    if (member == null)
+                    {
+                        message.reply("Please specify a member.");
+                        return;
+                    }
+                    const guild = message.member.guild;
+                    var withoutPerson = message.content.replace("<@!" + member.user.id + ">", "");
+                    var roleName = withoutPerson.substring(9);
+                    const role = guild.roles.cache.find(roleThingy => roleThingy.name === roleName);
+                    if (role == null)
+                    {
+                        message.reply("This role does not exist. (Check Capitalization and Spelling.)");
+                        return;
+                    }
+                    const hasRole = member.roles.cache.some(roleAgain => roleAgain.name === role.name);
+                    //console.log(hasRole);
+                    if (hasRole)
+                    {
+                        member.roles.remove(role);
+                        message.reply("Succesfully removed role from member!");
+                    }else
+                    {
+                        message.reply("This member already does not have this role.");
+                        return;
+                    }
+                }
             }else
             {
                 if (message.content.startsWith("^add")){
-                    message.reply("You aint cool enough for that");
+                    message.reply("You're not allowed to use this command.");
+                    return;
+                }
+
+                if (message.content.startsWith("^remove")){
+                    message.reply("You're not allowed to use this command.")
                     return;
                 }
             }
