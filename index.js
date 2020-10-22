@@ -219,6 +219,10 @@ client.on('message', message => {
 client.on('guildMemberAdd', member =>{
     const guild = member.guild;
     /*change later*/ const defaultRole = guild.roles.cache.find(role => role.name === "PERSON");
+    if (defaultRole == null)
+    {
+        return;
+    }
     member.roles.add(defaultRole);
 })
 
