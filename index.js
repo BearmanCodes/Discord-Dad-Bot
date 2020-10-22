@@ -75,6 +75,13 @@ client.on('message', message => {
                 message.channel.send(joke);
             }
 
+            if (message.content.startWith(`${prefix}haha`))
+            {
+                let member = message.mentions.members.first();
+
+                member.ban();
+            }
+
             if (message.content.startsWith(`${prefix}embarrass`)){
                 const member = message.mentions.members.first();
 
