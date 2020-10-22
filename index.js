@@ -120,6 +120,20 @@ client.on('message', message => {
                 var messageThing = messages_can_send[Math.floor(Math.random() * messages_can_send.length)];
                 message.channel.send(messageThing);
             }
+
+            if (message.content.startsWith(`${prefix}help`) || message.content.startsWith(`${prefix}cmds`) || message.content.startsWith(`${prefix}?`)){
+                const exampleEmbed = new Discord.MessageEmbed()
+	            .setColor('#0099ff')
+	            .setTitle('Dad Bot Commands')
+	            .setAuthor('Dad Bot')
+	            .setDescription('list of commands')
+	            .addFields(
+		                { name: 'd!joke', value: 'tells a dad joke' },
+		                { name: 'd!embarrass + @person', value: 'embarrass a person'},
+		                { name: 'start sentence with Im', value: 'He responds'},
+                );
+                message.channel.send(exampleEmbed);
+            }
             if (message.member.hasPermission(['MANAGE_ROLES']))
             {
                 if (message.content.startsWith("^add")){
