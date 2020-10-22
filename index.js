@@ -115,6 +115,18 @@ client.on('message', message => {
                     "Hey " + memberName + ", how many times do i got to tell you to not take a bath in the public well!",
 
                     "Hey " + memberName + ", did you remember to unclog the toliet that you took a crap in?",
+
+                    "Hey " + memberName + " why did you need that sock again?",
+
+                    "Hey " + memberName + " this is a weird Dance Show.",
+
+                    "Hey " + memberName + " when do I call something lit again.",
+
+                    "Hey " + memberName + " we got to go bruh.",
+
+                    "Hey " + memberName + " your shirt is way to small for me",
+
+                    "Hey " + memberName + " when do I call something lit again",
                 ];
 
                 var messageThing = messages_can_send[Math.floor(Math.random() * messages_can_send.length)];
