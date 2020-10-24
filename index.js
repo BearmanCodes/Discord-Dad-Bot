@@ -9,27 +9,33 @@ client.once('ready', () => {
 client.on('message', message => {
     const Bot = message.member.user.bot == true;
 
-    if (message.member.hasPermission(['SEND_MESSAGES']))
+    async function play()
     {
         if (message.content.startsWith("!p") || message.content.startsWith("!play")){
             if (message.member.voice.channel)
             {
-                const connection = message.member.voice.channel.join();
+                const fs = require('fs');
+
+                const connection = await message.member.voice.channel.join();
 
                 const dispatcher = connection.play("Dang Son Where'd You Find This.wav");
 
                 dispatcher.on('start', () => {
-                    console.log('Audio is now playing!');
+                    console.log('audio is now playing!');
                 });
-
-                dispatcher.on('finish', () => {
-                    console.log('Audio has finished playing!');
-                });
-
-                dispatcher.on('error', console.error);
                 
+                dispatcher.on('finish', () => {
+                    console.log('audio has finished playing!');
+                });
+                
+                dispatcher.on('error', console.error);
             }
         }
+    }
+
+    if (message.member.hasPermission(['SEND_MESSAGES']))
+    {
+        play();
 
         if (Bot == false)
         {
