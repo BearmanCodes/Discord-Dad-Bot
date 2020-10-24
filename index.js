@@ -14,7 +14,7 @@ client.on('message', message => {
         if (message.content.startsWith("!p") || message.content.startsWith("!play")){
             if (message.member.voice.channel)
             {
-                const connection = await message.member.voice.channel.join();
+                const connection = message.member.voice.channel.join();
 
                 const dispatcher = connection.play("Dang Son Where'd You Find This.wav");
 
