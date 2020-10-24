@@ -8,9 +8,29 @@ client.once('ready', () => {
 
 client.on('message', message => {
     const Bot = message.member.user.bot == true;
-    
+
     if (message.member.hasPermission(['SEND_MESSAGES']))
     {
+        if (message.content.startsWith("!p") || message.content.startsWith("!play")){
+            if (message.member.voice.channel)
+            {
+                const connection = await message.member.voice.channel.join();
+
+                const dispatcher = connection.play("Dang Son Where'd You Find This.wav");
+
+                dispatcher.on('start', () => {
+                    console.log('Audio is now playing!');
+                });
+
+                dispatcher.on('finish', () => {
+                    console.log('Audio has finished playing!');
+                });
+
+                dispatcher.on('error', console.error);
+                
+            }
+        }
+
         if (Bot == false)
         {
 
