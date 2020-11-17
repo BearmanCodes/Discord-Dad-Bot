@@ -9,12 +9,41 @@ client.once('ready', () => {
 client.on('message', message => {
     const Bot = message.member.user.bot == true;
 
+    async function doTheVC()
+    {
+        const inVC = message.member.voice.channel;
+
+        if (inVC)
+        {
+            const connection = await message.member.voice.channel.join();
+
+            const dispatcher = connection.play("Dang Son Where'd You Find This.wav");
+
+            dispatcher.on('start', () => {
+                console.log("AUDIO STARTED");
+            })
+
+            dispatcher.on('finish', () => {
+                console.log("AUDIO STOPPED");
+                connection.disconnect();
+            })
+
+
+            dispatcher.on('error', console.error);
+        }
+
+        if (inVC == false)
+        {
+            return;
+        }
+
+    }
 
     if (message.member.hasPermission(['SEND_MESSAGES']))
     {
-        if (message.content.startsWith("!p") || message.content.startsWith("!play"))
+        if (message.content.toLocaleLowerCase().startsWith("!p") || message.content.toLocaleLowerCase().startsWith("!play"))
         {
-            message.channel.send("Dang son where'd you find this!?");
+            doTheVC();
         }
 
         if (Bot == false)
