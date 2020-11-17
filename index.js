@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
+const { prefix, token } = require('C:/Users/User/Documents/GitHub/Discord-Dad-Bot/secret/config.json');
 const client = new Discord.Client();
 
 client.once('ready', () => {
