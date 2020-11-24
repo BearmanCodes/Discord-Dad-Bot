@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { prefix, token } = require('C:/Users/Elijah/Desktop/GitHub/Discord-Dad-Bot/secret/config.json');
+const { prefix, token } = require('./secret/config.json');
 const client = new Discord.Client();
 
 client.once('ready', () => {
@@ -13,7 +13,6 @@ client.on('message', message => {
     {
         if (Bot == false)
         {
-
             if (message.content.startsWith("im") || message.content.startsWith("Im")){
                 var restMessage = message.content.toLowerCase().replace("im", "");
                 message.reply("Hi," + restMessage + ". I'm Dad!");
@@ -226,16 +225,6 @@ client.on('message', message => {
 
         }
     }
-})
-
-client.on('guildMemberAdd', member =>{
-    const guild = member.guild;
-    /*change later*/ const defaultRole = guild.roles.cache.find(role => role.name === "PERSON");
-    if (defaultRole == null)
-    {
-        return;
-    }
-    member.roles.add(defaultRole);
 })
 
 client.login(token);
