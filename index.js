@@ -145,6 +145,7 @@ client.on('message', message => {
                 );
                 message.channel.send(exampleEmbed);
             }
+
             if (message.member.hasPermission(['MANAGE_ROLES']))
             {
                 if (message.content.startsWith("^add")){
@@ -228,6 +229,33 @@ client.on('message', message => {
 })
 
 client.login(token);
+
+client.on('guildMemberAdd', member => {
+    const guild = member.guild;
+
+    if (guild.id == "756313889674756097")
+    {
+        if (member.id == "546422726324125716")
+        {
+        const friendikirlRole = guild.roles.cache.find(role => role.id === "756900686553284718");
+        const myRole = guild.roles.cache.find(roless => roless.id == "782694266815512597");
+        member.roles.add(friendikirlRole);
+        member.roles.add(myRole);
+        if (myRole || friendikirlRole == null)
+        {
+            return;
+        }
+        }
+        else
+        {
+            return;
+        }
+    }
+    else
+    {
+        return;
+    }
+})
 
 // link to add bot to server: https://discordapi.com/permissions.html
 
