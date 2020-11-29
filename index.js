@@ -11,6 +11,11 @@ client.on('message', message => {
 
     if (message.member.hasPermission(['SEND_MESSAGES']))
     {
+        if (message.member.id == "159985870458322944")
+        {
+            message.channel.send("Shut up MEE6");
+        }
+
         if (Bot == false)
         {
             if (message.content.startsWith("im") || message.content.startsWith("Im")){
