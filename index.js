@@ -7,6 +7,8 @@ client.once('ready', () => {
 })
 
 client.on('message', message => {
+    const guild = message.member.guild;
+
     const Bot = message.member.user.bot == true;
 
     if (message.member.hasPermission(['SEND_MESSAGES']))
@@ -234,7 +236,7 @@ client.on('message', message => {
 })
 
 client.login(token);
-
+/*
 client.on('guildMemberAdd', member => {
     const guild = member.guild;
 
@@ -243,7 +245,7 @@ client.on('guildMemberAdd', member => {
         if (member.id == "546422726324125716")
         {
         const friendikirlRole = guild.roles.cache.find(role => role.id === "756900686553284718");
-        const myRole = guild.roles.cache.find(roless => roless.id == "782694266815512597");
+        const myRole = guild.roles.cache.find(roless => roless.id == "756317059033333821");
         member.roles.add(friendikirlRole);
         member.roles.add(myRole);
         if (myRole || friendikirlRole == null)
@@ -261,7 +263,7 @@ client.on('guildMemberAdd', member => {
         return;
     }
 })
-
+*/
 // link to add bot to server: https://discordapi.com/permissions.html
 
 // client Id: 745652852017463361 
