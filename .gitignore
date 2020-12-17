@@ -1,4 +1,4 @@
 .*
-secret/
 node_modules/
 .ionide/
+.env

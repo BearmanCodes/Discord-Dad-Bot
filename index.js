@@ -1,13 +1,12 @@
 const Discord = require('discord.js');
-const { prefix, token } = require('./secret/config.json');
 const client = new Discord.Client();
-
+require('dotenv').config()
 client.once('ready', () => {
     console.log('Hi ready, im dad');
 })
 
 client.on('message', message => {
-    const guild = message.member.guild;
+    //const guild = message.member.guild;
 
     const Bot = message.member.user.bot == true;
 
@@ -28,7 +27,7 @@ client.on('message', message => {
                 message.reply("Hi," + restMessage + ". I'm Dad!");
             }
             
-            if (message.content.startsWith(`${prefix}joke`)){
+            if (message.content.startsWith(`${process.env.PREFIX}joke`)){
                 var jokes = 
                 [
                     "No i did not get a haricut. I got them all cut.",
@@ -81,7 +80,7 @@ client.on('message', message => {
                 message.channel.send(joke);
             }
 
-            if (message.content.startsWith(`${prefix}embarrass`)){
+            if (message.content.startsWith(`${process.env.PREFIX}embarrass`)){
                 const member = message.mentions.members.first();
 
                 if (member == null)
@@ -139,7 +138,7 @@ client.on('message', message => {
                 message.channel.send(messageThing);
             }
 
-            if (message.content.startsWith(`${prefix}help`) || message.content.startsWith(`${prefix}cmds`) || message.content.startsWith(`${prefix}?`)){
+            if (message.content.startsWith(`${process.env.PREFIX}help`) || message.content.startsWith(`${process.env.PREFIX}cmds`) || message.content.startsWith(`${process.env.PREFIX}?`)){
                 const exampleEmbed = new Discord.MessageEmbed()
 	            .setColor('#0099ff')
 	            .setTitle('Dad Bot Commands')
@@ -235,7 +234,7 @@ client.on('message', message => {
     }
 })
 
-client.login(token);
+client.login(process.env.TOKEN);
 /*
 client.on('guildMemberAdd', member => {
     const guild = member.guild;
